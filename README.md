@@ -1,8 +1,8 @@
 # Application Environement Finder
 
-The objective of this project is to identify development, staging, and production environments for applications hosted by hosting providers that generate default URLs using the application name.
+The objective of this project is to find development, staging, and production environments for applications hosted by hosting providers that generate default URLs using the application name.
 
-Example, let's find environnements for the 'hello-world' compagny:
+Example, let's find environments of the 'hello-world' compagny:
 
 ```bash
 > python app_env_finder.py -a hello-world
@@ -45,7 +45,7 @@ You can install dependencies with the requirements.txt or with Pipenv
 > pip install requierments.txt
 
 ### With Pipenv
-This project use Pipenv as a virtual environement. You can install Pipenv by following this [link](https://pipenv.pypa.io/en/latest/install/)
+This project use Pipenv as a virtual environment. You can install Pipenv by following this [link](https://pipenv.pypa.io/en/latest/install/)
 
 Once Pipenv is installed, create a virtual env with Python 3 with this command:
 > pipenv shell
@@ -60,15 +60,15 @@ Get help
 
 > python app_env_finder.py -h
 
-Find environements on all hosting providers
+Find environments on all hosting providers
 
 > python app_env_finder.py -a hello-world
 
-Find environements only on Heroku
+Find environments only on Heroku
 
 > python app_env_finder.py -a hello-world -d herokuapp.com
 
-Find environements by giving the environement name
+Find environments by giving the environment name
 
 > python app_env_finder.py -e hello-world-dev
 
