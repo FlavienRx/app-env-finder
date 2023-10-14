@@ -46,12 +46,14 @@ def main():
         "-e",
         "--env",
         type=str,
+        nargs="+",
         help="Environement name",
     )
     parser.add_argument(
         "-d",
         "--domain",
         type=str,
+        nargs="+",
         help="Domain name",
     )
     parser.add_argument(
@@ -72,14 +74,12 @@ def main():
     args = parser.parse_args()
 
     if args.env:
-        envs = [args.env]
-
+        envs = args.env
     else:
         envs = ENVS
 
     if args.domain:
-        domains = [args.domain]
-
+        domains = args.domain
     else:
         domains = DOMAINS
 
