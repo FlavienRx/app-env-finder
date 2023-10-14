@@ -23,18 +23,35 @@ Example, let's find environments of the 'hello-world' compagny:
 
 List of domains/hosting providers managed:
 
-- herokuapp.com
-- osc-fr1.scalingo.io
-- osc-secnum-fr1.scalingo.io
-- cleverapps.io
-- firebaseapp.com
-- web.app
-- netlify.app
-- up.railway.app
-- onrender.com
-- vercel.app
-- deta.dev
-- pythonanywhere.com
+- Scalingo:
+    - osc-fr1.scalingo.io
+    - osc-secnum-fr1.scalingo.io
+
+- Clever Cloud:
+    - cleverapps.io
+
+- Firebase:
+    - firebaseapp.com
+    - web.app
+
+- Netlify
+    - netlify.app
+
+- Railway
+    - up.railway.app
+
+- Render
+    - onrender.com
+
+- Vercel
+    - vercel.app
+
+- Deta Space
+    - deta.dev
+
+- Pythonanywhere
+    - pythonanywhere.com
+    - eu.pythonanywhere.com
 
 ## Instalation
 

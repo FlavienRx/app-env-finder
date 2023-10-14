@@ -1,5 +1,4 @@
 DOMAINS = [
-    "herokuapp.com",
     "osc-fr1.scalingo.io",
     "osc-secnum-fr1.scalingo.io",
     "cleverapps.io",
@@ -11,4 +10,5 @@ DOMAINS = [
     "vercel.app",
     "deta.dev",
     "pythonanywhere.com",
+    "eu.pythonanywhere.com",
 ]
