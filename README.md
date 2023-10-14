@@ -64,14 +64,23 @@ Find environments on all hosting providers
 
 > python app_env_finder.py -a hello-world
 
-Find environments only on Heroku
+Find environments on a specific domains
 
-> python app_env_finder.py -a hello-world -d herokuapp.com
+> python app_env_finder.py -a hello-world -d hosting-provider.com another-hosting-provider.com
 
 Find environments by giving the environment name
 
 > python app_env_finder.py -e hello-world-dev
 
+Find environments by giving the environment names on a specific domains
+
+> python app_env_finder.py -e hello-world-dev hello-world-prod -d hosting-provider.com another-hosting-provider.com
+
+Test all HTTP methods
+
+> python app_env_finder.py -a hello-world -m
+
 Change default timeout
 
-> python app_env_finder.py -e hello-world-dev -t 60
+> python app_env_finder.py -a hello-world -t 60
+
