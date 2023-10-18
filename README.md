@@ -5,7 +5,7 @@ The objective of this project is to find development, staging, and production en
 Example, let's find environments of the 'hello-world' compagny:
 
 ```bash
-> python app_env_finder.py -a hello-world
+> ./app_env_finder.py -a hello-world
 502 Bad Gateway GET http://hello-world.herokuapp.com
 404 Not Found GET http://hello-world-dev.herokuapp.com
 ...
@@ -75,29 +75,36 @@ To install dependencies, run this command:
 
 Get help
 
-> python app_env_finder.py -h
+> ./app_env_finder.py -h
 
 Find environments on all hosting providers
 
-> python app_env_finder.py -a hello-world
+> ./app_env_finder.py -a hello-world
 
 Find environments on a specific domains
 
-> python app_env_finder.py -a hello-world -d hosting-provider.com another-hosting-provider.com
+> ./app_env_finder.py -a hello-world -d hosting-provider.com another-hosting-provider.com
 
 Find environments by giving the environment name
 
-> python app_env_finder.py -e hello-world-dev
+> ./app_env_finder.py -e hello-world-dev
 
 Find environments by giving the environment names on a specific domains
 
-> python app_env_finder.py -e hello-world-dev hello-world-prod -d hosting-provider.com another-hosting-provider.com
+> ./app_env_finder.py -e hello-world-dev hello-world-prod -d hosting-provider.com another-hosting-provider.com
 
 Test all HTTP methods
 
-> python app_env_finder.py -a hello-world -m
+> ./app_env_finder.py -a hello-world -m
+
+Test some HTTP methods
+
+> ./app_env_finder.py -a hello-world -m GET POST
 
 Change default timeout
 
-> python app_env_finder.py -a hello-world -t 60
+> ./app_env_finder.py -a hello-world -t 60
 
+Hide request response with specific code
+
+> ./app_env_finder.py -a hello-world -H 404
