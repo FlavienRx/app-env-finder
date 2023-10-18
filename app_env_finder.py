@@ -1,6 +1,7 @@
 import argparse
 
 import requests
+from requests import Response
 from colorama import Fore, Style
 from requests.exceptions import ConnectionError, ConnectTimeout, ReadTimeout
 
@@ -9,28 +10,55 @@ from envs import ENVS
 from methods import METHODS
 
 
-def make_call(method, url, timeout):
+def send_request(method: str, url: str, timeout: int) -> Response or None:
     try:
-        response = requests.request(method, url, timeout=timeout)
+        return requests.request(method, url, timeout=timeout)
 
     except (ReadTimeout, ConnectTimeout):
         print(Fore.RED, "Timeout", url)
-        return
 
     except ConnectionError:
         print(Fore.RED, "Connection error", url)
+
+
+def show_response(
+    response: Response,
+    method: str,
+    url: str,
+    hide_code: list[int],
+) -> None:
+    if response.status_code in hide_code:
         return
 
-    if response.status_code == 404:
+    elif response.status_code == 404:
         style = Fore.RED
 
-    elif response.status_code == 200:
+    elif 200 <= response.status_code < 300:
         style = Fore.GREEN
 
     else:
         style = Style.RESET_ALL
 
     print(style, response.status_code, response.reason, method, url)
+
+
+def run(
+    app_name: str,
+    envs: list[str],
+    domains: list[str],
+    methods: list[str],
+    timeout: int,
+    hide_code: list[int],
+) -> None:
+    for env in envs:
+        for domain in domains:
+            url = "http://" + env.format(app_name=app_name) + "." + domain
+
+            for method in methods:
+                response = send_request(method, url, timeout)
+
+                if response is not None:
+                    show_response(response, method, url, hide_code)
 
 
 def main():
@@ -59,9 +87,11 @@ def main():
     parser.add_argument(
         "-m",
         "--methods",
-        action="store_true",
-        default=False,
-        help="Check all request methods (GET, POST, ...)",
+        type=str,
+        nargs="*",
+        choices=METHODS,
+        default=None,
+        help="Test request methods, empty value will test all methods",
     )
     parser.add_argument(
         "-t",
@@ -70,31 +100,31 @@ def main():
         default=30,
         help="Request timeout",
     )
+    parser.add_argument(
+        "-H",
+        "--hide-code",
+        type=int,
+        nargs="+",
+        default=[],
+        help="Hide HTTP response codes",
+    )
 
     args = parser.parse_args()
 
-    if args.env:
-        envs = args.env
-    else:
-        envs = ENVS
+    envs = args.env if args.env else ENVS
+    domains = args.domain if args.domain else DOMAINS
 
-    if args.domain:
-        domains = args.domain
+    if args.methods is None:
+        methods = ["GET"]
+
+    elif not args.methods:
+        methods = METHODS
+
     else:
-        domains = DOMAINS
+        methods = args.methods
 
     try:
-        for domain in domains:
-            for env in envs:
-                url = "http://" + env.format(app_name=args.app_name) + "." + domain
-
-                if not args.methods:
-                    make_call("GET", url, args.timeout)
-
-                else:
-                    for method in METHODS:
-                        make_call(method, url, args.timeout)
-
+        run(args.app_name, envs, domains, methods, args.timeout, args.hide_code)
     except KeyboardInterrupt:
         return
 
